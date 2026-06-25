@@ -1,1 +1,268 @@
+import os
 
+# Create the index.html content for the Interactive Museum Hub
+html_content = """<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fronteiras em Chamas: Conflitos e Território</title>
+    <style>
+        /* Base Setup with Nassar-inspired Palette */
+        @page {
+            size: A4;
+            margin: 15mm 12mm;
+            background-color: #f4f3ef;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f3ef;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            font-size: 10.5pt;
+        }
+
+        /* Full bleed bold header using negative margins */
+        .museum-header {
+            background-color: #c93b2b; /* Vibrant raw red */
+            color: #ffffff;
+            margin: -15mm -12mm 25px -12mm;
+            padding: 35px 12mm;
+            border-bottom: 8px solid #1c3d5a; /* Deep structural blue */
+        }
+
+        .museum-title {
+            font-size: 24pt;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            margin: 0 0 5px 0;
+        }
+
+        .museum-subtitle {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #f7d070; /* Raw yellow accent */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        /* Conceptual Frame & Layout */
+        .intro-box {
+            background: #ffffff;
+            border: 2px solid #1a1a1a;
+            padding: 15px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .intro-box::after {
+            content: "MANIFESTO VISUAL";
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: #f7d070;
+            color: #1a1a1a;
+            font-size: 8pt;
+            font-weight: bold;
+            padding: 2px 6px;
+            border: 1px solid #1a1a1a;
+        }
+
+        h2 {
+            font-size: 14pt;
+            color: #1c3d5a;
+            text-transform: uppercase;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            padding-left: 10px;
+            border-left: 5px solid #c93b2b;
+            page-break-after: avoid;
+        }
+
+        h3 {
+            font-size: 11pt;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            page-break-after: avoid;
+        }
+
+        p {
+            margin: 0 0 10px 0;
+            text-align: justify;
+        }
+
+        /* Math/Formula style for geopolitical equations inspired by Nassar's raw graphics */
+        .geo-equation {
+            display: block;
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            background: #eef1f4;
+            border-top: 1px dashed #1a1a1a;
+            border-bottom: 1px dashed #1a1a1a;
+        }
+
+        .math-concept {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 12pt;
+            color: #c93b2b;
+        }
+
+        /* Content Grid simulated with tables for WeasyPrint support */
+        .axis-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+
+        .axis-table td {
+            vertical-align: top;
+            padding: 12px;
+            border: 1px solid #cccccc;
+            background: #ffffff;
+            width: 50%;
+        }
+
+        .axis-title {
+            font-weight: bold;
+            color: #c93b2b;
+            text-transform: uppercase;
+            font-size: 10pt;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 3px;
+        }
+
+        /* Embedded Elements for the Padlet Guide */
+        .padlet-guide {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 15px;
+            margin-top: 25px;
+            border-radius: 0;
+        }
+
+        .padlet-guide h3 {
+            color: #f7d070;
+            margin-top: 0;
+        }
+
+        .color-palette {
+            display: block;
+            margin: 10px 0;
+        }
+
+        .color-swatch {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+            border: 1px solid #ffffff;
+        }
+
+        .bullet-list {
+            margin: 0 0 15px 0;
+            padding-left: 20px;
+        }
+
+        .bullet-list li {
+            margin-bottom: 5px;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 8pt;
+            color: #777777;
+            text-align: center;
+            border-top: 1px solid #cccccc;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="museum-header">
+        <div class="museum-title">Fronteiras em Chamas</div>
+        <div class="museum-subtitle">Conflitos, Território e a Estética de Emmanuel Nassar</div>
+    </div>
+
+    <div class="intro-box">
+        <p>Este documento serve como a matriz conceitual e o roteiro estrutural para o desenvolvimento do ambiente interativo e do infográfico digital (Padlet). A proposta cruza a crueza geopolítica da formação territorial paranaense com a ironia visual, as cores industriais e a colagem urbana do artista paraense Emmanuel Nassar.</p>
+    </div>
+
+    <h2>1. Eixos Históricos de Confronto</h2>
+    
+    <h3>A. Revolução Federalista e o Cerco da Lapa (1894)</h3>
+    <p>O embate sangrento entre as forças legalistas (os "pica-paus", defensores do governo de Floriano Peixoto) e os revolucionários federalistas (os "maragatos"). O sacrifício militar no Cerco da Lapa funcionou como uma represa estratégica que impediu o avanço das tropas rebeldes em direção à capital da República, consolidando o sangue local na engrenagem da história nacional.</p>
+
+    <h3>B. Guerra do Contestado (1912–1916)</h3>
+    <p>Um conflito social, territorial e messiânico de proporções devastadoras na fronteira contestada entre o Paraná e Santa Catarina. De um lado, a resistência cabocla e o fervor místico dos monges; de outro, o aparato do Estado moderno associado ao capital internacional monopolista.</p>
+
+    <h2>2. A Tríade Geográfica e Econômica (O Estopim)</h2>
+    <p>A violência nas fronteiras não se deu por abstrações ideológicas, mas sim pela materialidade do solo, do trilho e da floresta. Graficamente, essa dinâmica pode ser sintetizada na seguinte relação de forças:</p>
+
+    <div class="geo-equation">
+        <span class="math-concept">Território Disponível = Espaço Comum − (Trilho × Capital Estrangeiro) − Madeira Exportada</span>
+    </div>
+
+    <table class="axis-table">
+        <tr>
+            <td>
+                <div class="axis-title">A Estrada de Ferro (EFSPRG)</div>
+                <p>A construção da ferrovia São Paulo-Rio Grande pela <em>Brazil Railway Company</em> desapropriou uma faixa de 15 quilômetros de cada lado da linha. Milhares de famílias camponesas foram sumariamente expulsas de suas posses ancestrais para dar lugar ao progresso de ferro.</p>
+            </td>
+            <td>
+                <div class="axis-title">A Economia da Madeira</div>
+                <p>O desmatamento em massa das florestas de Araucária pela <em>Southern Brazil Lumber & Colonization Company</em> transformou o ecossistema e a economia local. A árvore sagrada virou mercadoria estocável e riqueza enviada para fora, gerando exclusão social.</p>
+            </td>
+        </tr>
+    </table>
+
+    <h2>3. O Choque Estético: Emmanuel Nassar como Manifesto</h2>
+    <p>A integração com a obra do paraense Emmanuel Nassar propõe um violento choque pop-conceitual. Em vez da representação tradicional, bucólica ou puramente acadêmica da história sulista, adota-se a linguagem da <strong>gambiarra urbana, letreiros populares de comércio e apropriação de símbolos</strong>.</p>
+    
+    <ul class="bullet-list">
+        <li><strong>A Araucária Geométrica:</strong> Desenhada de forma seca, crua, cortada por serras que simulam cifrões industriais ou engrenagens.</li>
+        <li><strong>Símbolos Oficiais Rasurados:</strong> O Brasão do Paraná e as fardas históricas ganham contornos fortes em tinta preta e intervenções que simulam pichação e stencil.</li>
+        <li><strong>Ironia de Consumo:</strong> Inserção de falsos rótulos comerciais e avisos de "Propriedade Privada" sobrepostos às fotografias originais dos caboclos e soldados da Lapa.</li>
+    </ul>
+
+    <div class="padlet-guide">
+        <h3>Diretrizes para montagem do Padlet (Colagem Digital)</h3>
+        <p>A disposição visual no Padlet deve ser organizada em colunas industriais estruturadas, simulando placas de beira de estrada. Use a paleta cromática de Nassar:</p>
+        <div class="color-palette">
+            <span class="color-swatch" style="background-color: #c93b2b;"></span> Vermelho Óxido
+            <span class="color-swatch" style="background-color: #1c3d5a;"></span> Azul Estrutural
+            <span class="color-swatch" style="background-color: #f7d070;"></span> Amarelo Placa
+            <span class="color-swatch" style="background-color: #1a1a1a;"></span> Preto Alcatrão
+        </div>
+        <p>Insira links interativos, áudios com os manifestos messiânicos e imagens em formato de colagem digital disruptiva.</p>
+    </div>
+
+    <div class="footer-note">
+        Museu Online Interativo — Fronteiras em Chamas — Curadoria de História e Artes Visuais.
+    </div>
+
+</body>
+</html>
+"""
+
+# Write code directly to index.html
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("File 'index.html' successfully generated.")
