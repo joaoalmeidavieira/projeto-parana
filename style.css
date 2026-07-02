@@ -1,1 +1,163 @@
+/* ==========================================================================
+   1. CONFIGURAÇÕES GERAIS E FONTES
+   ========================================================================== */
+/* Nota: Como o Adobe Stock é um banco de imagens/vetores, para as fontes 
+   geralmente usamos o Adobe Fonts ou Google Fonts. Configurei uma família de 
+   fontes elegante e limpa (serifada para títulos históricos e sem serifa para o texto). */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap');
 
+:root {
+    --azul-escuro: #0B1B3D;       /* Tom principal (fundo e cabeçalhos) */
+    --azul-intermediario: #1E3A8A; /* Destaques e botões */
+    --azul-claro: #3B82F6;        /* Efeitos de hover e links */
+    --azul-gelo: #F0F4F8;         /* Fundos claros de seções */
+    --branco: #FFFFFF;
+    --transicao-suave: all 0.4s ease-in-out;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-box: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--azul-gelo);
+    color: var(--azul-escuro);
+    line-height: 1.6;
+    /* Transição suave de tela ao carregar ou mudar de estado */
+    opacity: 0;
+    animation: fadeIn/Entrada 1s ease-in-out forwards;
+}
+
+@keyframes fadeInEntrada {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2, h3 {
+    font-family: 'Cinzel', serif; /* Toque histórico/clássico para os títulos */
+    color: var(--azul-escuro);
+}
+
+/* ==========================================================================
+   2. SEÇÕES DE FUNDO TEMÁTICAS (HISTÓRIA)
+   ========================================================================== */
+/* Substitua os links 'sua-imagem...' pelas imagens reais ou do Adobe Stock */
+.hero-section {
+    background: linear-gradient(rgba(11, 27, 61, 0.8), rgba(11, 27, 61, 0.9)), 
+                url('sua-imagem-revolucao-federalista.jpg') no-repeat center center/cover;
+    color: var(--branco);
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.secao-lapa {
+    background: linear-gradient(rgba(240, 244, 248, 0.9), rgba(240, 244, 248, 0.9)), 
+                url('sua-imagem-cerco-da-lapa.jpg') no-repeat center center/cover;
+    padding: 80px 20px;
+}
+
+.secao-contestado {
+    background: linear-gradient(rgba(30, 58, 138, 0.85), rgba(11, 27, 61, 0.95)), 
+                url('sua-imagem-guerra-do-contestado.jpg') no-repeat center center/cover;
+    color: var(--branco);
+    padding: 80px 20px;
+}
+
+/* ==========================================================================
+   3. BOTÕES DE CATEGORIAS
+   ========================================================================== */
+.container-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 40px 20px;
+}
+
+.btn-categoria {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 30px;
+    border: 2px solid var(--azul-intermediario);
+    background-color: transparent;
+    color: var(--azul-intermediario);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transicao-suave);
+}
+
+/* Efeito Hover suave nos botões */
+.btn-categoria:hover {
+    background-color: var(--azul-intermediario);
+    color: var(--branco);
+    box-shadow: 0 5px 15px rgba(30, 58, 138, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Variante de botão ativo ou de destaque */
+.btn-categoria.ativo {
+    background-color: var(--azul-escuro);
+    border-color: var(--azul-escuro);
+    color: var(--branco);
+}
+
+/* ==========================================================================
+   4. RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================================================== */
+
+/* --- TELA DE TABLET (Até 992px) --- */
+@media (max-width: 992px) {
+    .hero-section {
+        padding: 80px 15px;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    .container-botoes {
+        gap: 15px;
+    }
+    
+    .btn-categoria {
+        padding: 10px 22px;
+        font-size: 0.9rem;
+    }
+}
+
+/* --- TELA DE CELULAR (Até 600px) --- */
+@media (max-width: 600px) {
+    body {
+        font-size: 14px; /* Ajusta a leitura no celular */
+    }
+
+    .hero-section {
+        padding: 60px 10px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Os botões ocupam a largura total no celular para facilitar o clique */
+    .container-botoes {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px 15px;
+    }
+
+    .btn-categoria {
+        width: 100%;
+        text-align: center;
+        padding: 14px;
+    }
+}
